@@ -544,9 +544,9 @@ syntax keyword scribbleMarkup @image-file @element->string @span-class @itemize 
 syntax keyword scribbleMarkup @chunk @lp-include nextgroup=atBraceRange,atBrackRange
 " NO SECTION 7: Low-Level Scribble API
 
-syntax region atParenRange matchgroup=Delimiter start="("rs=s+1  matchgroup=Delimiter end=")"re=e-1  contains=@SchemeBase,atExprStart,scribbleMarkup contained nextgroup=atBrackRange
-syntax region atBrackRange matchgroup=Delimiter start="\["rs=s+1  matchgroup=Delimiter end="\]"re=e-1  contains=@SchemeBase,atExprStart,scribbleMarkup contained nextgroup=atBraceRange
-syntax region atBraceRange matchgroup=Delimiter start="{"rs=s+1  matchgroup=Delimiter end="}"re=e-1  contains=atExprStart,scribbleMarkup,@Spell contained
+syntax region atParenRange matchgroup=scribbleParen start="("rs=s+1  matchgroup=scribbleParen end=")"re=e-1  contains=@SchemeBase,atExprStart,scribbleMarkup contained nextgroup=atBrackRange
+syntax region atBrackRange matchgroup=scribbleParen start="\["rs=s+1  matchgroup=scribbleParen end="\]"re=e-1  contains=@SchemeBase,atExprStart,scribbleMarkup contained nextgroup=atBraceRange
+syntax region atBraceRange matchgroup=scribbleParen start="{"rs=s+1  matchgroup=scribbleParen end="}"re=e-1  contains=atExprStart,scribbleMarkup,@Spell contained
 " syntax region atInnerBraceRange matchgroup=atBraceRange start="{"rs=s+1  end="}"re=e-1  contains=atExprStart,atInnerBraceRange,scribbleMarkup,@Spell contained
 
 syntax match atIdentifier /[-<a-z!$%&*\/:<=>?^_~0-9+.>]\+/ nextgroup=atBraceRange,atBrackRange contained
@@ -560,6 +560,7 @@ syn region scribbleMultilineComment start=/@;(/ end=/)/ contains=scribbleMultili
 command -nargs=+ HiLink highlight def link <args>
 HiLink atBraceRange      String
 HiLink atExprStart       Delimiter
+HiLink scribbleParen     Delimiter
 HiLink scribbleMarkup    Statement
 HiLink scribbleFunc      Function
 HiLink scribbleComment            Comment
