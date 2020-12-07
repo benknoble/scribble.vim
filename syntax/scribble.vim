@@ -34,8 +34,7 @@ syntax spell toplevel
 " Scribble is a racket language, is mzscheme... so we set this anyway
 syntax include @SchemeBase syntax/racket.vim
 
-syn match racketError ,[]})],
-syn match racketSyntax    "#lang "
+syntax match racketSyntax "#lang "
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " I'll declare the scribble/... keywords here, then reproduce them in the
@@ -448,7 +447,7 @@ syntax keyword racketFunc lp-include
 " #lang scribble/base
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax keyword scribbleMarkup @title @section @subsection @subsubsection @subsubsub*section nextgroup=atBraceRange,atBrackRange
-" syntax keyword scribbleMarkup @include-section @author @author+email @para @nested nextgroup=atBraceRange,atBrackRange
+syntax keyword scribbleMarkup @include-section @author @author+email @para @nested nextgroup=atBraceRange,atBrackRange
 syntax keyword scribbleMarkup @centered @margin-note @margin-note* @itemlist @item nextgroup=atBraceRange,atBrackRange
 syntax keyword scribbleMarkup @item?  @tabular @verbatim @elem @italic nextgroup=atBraceRange,atBrackRange
 syntax keyword scribbleMarkup @bold @tt @subscript @superscript @smaller nextgroup=atBraceRange,atBrackRange
@@ -465,7 +464,7 @@ syntax keyword scribbleMarkup @index-section @table-of-contents @local-table-of-
 " (Combined and sorted for uniqueness checking)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax keyword scribbleMarkup @10pt @abstract @affiliation @affiliation-mark @affiliation-sep nextgroup=atBraceRange,atBrackRange
-" syntax keyword scribbleMarkup @author @authorinfo @authors @author/short @category
+syntax keyword scribbleMarkup @author @authorinfo @authors @author/short @category
 syntax keyword scribbleMarkup @conferenceinfo @copyrightdata @copyrightyear @email @include-abstract nextgroup=atBraceRange,atBrackRange
 syntax keyword scribbleMarkup @institute @institutes @keywords @nocopyright @noqcourier nextgroup=atBraceRange,atBrackRange
 syntax keyword scribbleMarkup @notimes @onecolumn @preprint @terms  nextgroup=atBraceRange,atBrackRange
@@ -544,21 +543,21 @@ syntax keyword scribbleMarkup @image-file @element->string @span-class @itemize 
 syntax keyword scribbleMarkup @chunk @lp-include nextgroup=atBraceRange,atBrackRange
 " NO SECTION 7: Low-Level Scribble API
 
-syntax region atParenRange matchgroup=scribbleParen start="("rs=s+1  matchgroup=scribbleParen end=")"re=e-1  contains=@SchemeBase,atExprStart,scribbleMarkup contained nextgroup=atBrackRange
-syntax region atBrackRange matchgroup=scribbleParen start="\["rs=s+1  matchgroup=scribbleParen end="\]"re=e-1  contains=@SchemeBase,atExprStart,scribbleMarkup contained nextgroup=atBraceRange
-syntax region atBraceRange matchgroup=scribbleParen start="{"rs=s+1  matchgroup=scribbleParen end="}"re=e-1  contains=atExprStart,scribbleMarkup,@Spell contained
-" syntax region atInnerBraceRange matchgroup=atBraceRange start="{"rs=s+1  end="}"re=e-1  contains=atExprStart,atInnerBraceRange,scribbleMarkup,@Spell contained
+syntax region atBrackRange matchgroup=scribbleParen start="\[" end="\]" contains=@SchemeBase,atExprStart,scribbleMarkup contained nextgroup=atBraceRange
+syntax region atBraceRange matchgroup=scribbleParen start="{" end="}" contains=atExprStart,atInnerBraceRange,scribbleMarkup contained
+syntax region atInnerBraceRange matchgroup=atBraceRange start="{" end="}" contains=atExprStart,atInnerBraceRange,scribbleMarkup contained
 
-syntax match atIdentifier /[-<a-z!$%&*\/:<=>?^_~0-9+.>]\+/ nextgroup=atBraceRange,atBrackRange contained
+syntax match atIdentifier /[-<a-z!$%&*\/:<=>?^_~0-9+.@>]\+/ nextgroup=atBraceRange,atBrackRange contained
 
-syntax match atExprStart "@" nextgroup=@SchemeBase,atIdentifier,scribbleMarkup,atBrackRange,atBraceRange,atParenRange containedin=atBraceRange,atParenRange,@SchemeBase contains=@NoSpell,@SchemeBase
+syntax match atExprStart "@" nextgroup=atBrackRange,atBraceRange,atIdentifier,@SchemeBase containedin=atBraceRange,atInnerBraceRange,@SchemeBase
 
-syn match scribbleComment /@;.*$/ contains=@Spell
-syn region scribbleMultilineComment start=/@;(/ end=/)/ contains=scribbleMultilineComment,@Spell
+syntax match scribbleComment /@;.*$/ contains=@Spell
+syntax region scribbleMultilineComment start=/@;(/ end=/)/ contains=scribbleMultilineComment,@Spell
 
 " scheme itself is ignored in atBraces
 command -nargs=+ HiLink highlight def link <args>
 HiLink atBraceRange      String
+HiLink atInnerBraceRange String
 HiLink atExprStart       Delimiter
 HiLink scribbleParen     Delimiter
 HiLink scribbleMarkup    Statement
