@@ -464,7 +464,7 @@ syntax keyword scribbleMarkup @index-section @table-of-contents @local-table-of-
 " (Combined and sorted for uniqueness checking)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax keyword scribbleMarkup @10pt @abstract @affiliation @affiliation-mark @affiliation-sep nextgroup=atBraceRange,atBrackRange
-syntax keyword scribbleMarkup @author @authorinfo @authors @author/short @category
+syntax keyword scribbleMarkup @author @authorinfo @authors @author/short @category nextgroup=atBraceRange,atBrackRange
 syntax keyword scribbleMarkup @conferenceinfo @copyrightdata @copyrightyear @email @include-abstract nextgroup=atBraceRange,atBrackRange
 syntax keyword scribbleMarkup @institute @institutes @keywords @nocopyright @noqcourier nextgroup=atBraceRange,atBrackRange
 syntax keyword scribbleMarkup @notimes @onecolumn @preprint @terms  nextgroup=atBraceRange,atBrackRange
