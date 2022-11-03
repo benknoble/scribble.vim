@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:	Scribble (a racket language)
-" Last Change:	2011-09-28
+" Last Change: 2022 Nov 03
 " Author:	Tim Brown <tim.brown@timb.net>
 " Revision:      $Revision: 1.2 $
 "
@@ -544,8 +544,8 @@ syntax keyword scribbleMarkup @chunk @lp-include nextgroup=atBraceRange,atBrackR
 " NO SECTION 7: Low-Level Scribble API
 
 syntax region atBrackRange matchgroup=scribbleParen start="\[" end="\]" contains=@SchemeBase,atExprStart,scribbleMarkup contained nextgroup=atBraceRange
-syntax region atBraceRange matchgroup=scribbleParen start="{" end="}" contains=atExprStart,atInnerBraceRange,scribbleMarkup contained
-syntax region atInnerBraceRange matchgroup=atBraceRange start="{" end="}" contains=atExprStart,atInnerBraceRange,scribbleMarkup contained
+syntax region atBraceRange matchgroup=scribbleParen start="{" end="}" contains=atExprStart,atInnerBraceRange,scribbleMarkup,@Spell contained
+syntax region atInnerBraceRange matchgroup=atBraceRange start="{" end="}" contains=atExprStart,atInnerBraceRange,scribbleMarkup,@Spell contained
 
 syntax match atIdentifier /[-<a-z!$%&*\/:<=>?^_~0-9+.@>]\+/ nextgroup=atBraceRange,atBrackRange contained
 
