@@ -547,7 +547,7 @@ syntax region atBrackRange matchgroup=scribbleParen start="\[" end="\]" contains
 syntax region atBraceRange matchgroup=scribbleParen start="{" end="}" contains=atExprStart,atInnerBraceRange,scribbleMarkup,@Spell contained
 syntax region atInnerBraceRange matchgroup=atBraceRange start="{" end="}" contains=atExprStart,atInnerBraceRange,scribbleMarkup,@Spell contained
 
-syntax match atIdentifier /[-<a-z!$%&*\/:<=>?^_~0-9+.@>]\+/ nextgroup=atBraceRange,atBrackRange contained
+syntax match atIdentifier /[-<a-zA-Z!$%&*\/:<=>?^_~0-9+.@>]\+/ nextgroup=atBraceRange,atBrackRange contained
 
 syntax match atExprStart "@" nextgroup=atBrackRange,atBraceRange,atIdentifier,@SchemeBase containedin=atBraceRange,atInnerBraceRange,@SchemeBase
 
